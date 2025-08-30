@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VAL | Asistente creativo de VEYLOR</title>
+  <style>
+    /* --- FUENTES Y VARIABLES --- */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #000000;
+      --secondary: #1a1a1a;
+      --accent: #c7a73b; /* Tono dorado más refinado */
+      --bg-dark: #f9f9f9;
+      --bg-light: #ffffff;
+      --text: #222222;
+      --gray: #555555;
+      --line: #e5e5e5;
+      --section-persuadir: #fffaf0;
+      --section-valores: #f5fcf7;
+      --section-marca: #f5f7ff;
+      --section-ejemplos: #fdfaf5;
+      --section-val: #f5fcfa;
+      --section-tips: #f8f5ff;
+      --spacing-sm: 1rem;
+      --spacing-md: 2rem;
+      --spacing-lg: 4rem;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.06);
+      --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background-color: var(--bg-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      object-fit: cover;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      opacity: 0.8;
+      text-decoration: none;
+    }
+
+    /* --- HEADER --- */
+    header {
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo img {
+      height: 42px; 
+      width: auto;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      color: var(--secondary);
+      font-size: 1rem;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* --- HERO --- */
+    .hero-container {
+        position: relative;
+        background: linear-gradient(135deg, #ffffff, #f7f7f7);
+    }
+    .hero {
+      padding: 10vh 5% 8vh;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.8rem;
+      margin-bottom: 1.5rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--primary);
+      background: -webkit-linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: var(--gray);
+      max-width: 900px; 
+      margin: 0 auto 2.5rem;
+    }
+    
+    .hero-separator {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+    }
+    .hero-separator svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 80px;
+    }
+    .hero-separator .shape-fill {
+        fill: var(--bg-dark);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      background-color: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+    }
+    
+    .btn-secondary:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+
+    /* --- SECCIÓN MATRIZ GENERAL --- */
+    .section {
+      padding: var(--spacing-lg) 5%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: var(--spacing-md);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 4px;
+      background-color: var(--accent);
+      margin: 1.2rem auto;
+      border-radius: 2px;
+    }
+
+    .matriz-intro {
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--gray);
+    }
+
+    /* --- DIAGRAMA MATRIZ SVG --- */
+    .matriz-diagram-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 4rem 0;
+        min-height: 450px;
+    }
+
+    .matriz-diagram-svg {
+        width: 100%;
+        max-width: 1100px;
+        overflow: visible;
+    }
+
+    .matriz-diagram-svg .node-circle {
+        transition: transform 0.3s ease, filter 0.3s ease;
+        cursor: pointer;
+    }
+    .matriz-diagram-svg .node-circle:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+    }
+    .matriz-diagram-svg .node-text {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        fill: white;
+        text-anchor: middle;
+        pointer-events: none;
+    }
+    .matriz-diagram-svg .node-desc {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        fill: var(--gray);
+        text-anchor: middle;
+        pointer-events: none;
+    }
+    .matriz-diagram-svg .line-connector {
+        stroke: var(--line);
+        stroke-width: 2;
+        stroke-dasharray: 5 5;
+    }
+    .matriz-diagram-svg .center-text {
+        font-weight: 700;
+        font-size: 24px;
+        fill: var(--primary);
+        text-anchor: middle;
+    }
+    .matriz-diagram-svg .explanation-box {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--gray);
+        text-align: center; 
+    }
+    .matriz-diagram-svg .explanation-box strong {
+        color: var(--text);
+    }
+
+    /* --- DIAGRAMA POR EJE --- */
+    .ejes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+      margin-top: 5rem;
+    }
+
+    .eje {
+      background-color: var(--bg-light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      max-width: 1200px; 
+      margin: 0 auto;
+      border-top: 8px solid var(--accent);
+    }
+
+    .eje-header {
+      padding: 2rem 2.5rem;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .eje.persuadir { border-color: #c78f00; }
+    .eje.valores { border-color: #2c7d5f; }
+    .eje.marca { border-color: #2b4b7f; }
+
+    .eje.persuadir .eje-header { background-color: #c78f00; }
+    .eje.valores .eje-header { background-color: #2c7d5f; }
+    .eje.marca .eje-header { background-color: #2b4b7f; }
+
+    .eje-content {
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr; 
+      gap: 3rem;
+      align-items: center; 
+    }
+
+    @media (max-width: 992px) {
+      .eje-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .atributos {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .atributo {
+      padding: 1.5rem;
+      background-color: #fafafa;
+      border-radius: var(--radius);
+      border-left: 5px solid var(--accent);
+      transition: var(--transition);
+    }
+    .eje.persuadir .atributo { border-color: #c78f00; }
+    .eje.valores .atributo { border-color: #2c7d5f; }
+    .eje.marca .atributo { border-color: #2b4b7f; }
+
+    .atributo:hover {
+      background-color: #f5f5f5;
+      transform: translateX(5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .atributo h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+    
+    .atributo p {
+        font-size: 1rem;
+        color: var(--gray);
+    }
+
+    .palabras-clave-container {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--line);
+    }
+    .palabras-clave-container h4 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--secondary);
+    }
+    .palabras-clave {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .palabra-tag {
+        font-size: 0.9rem;
+        color: var(--gray);
+        background-color: #f0f0f0;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        transition: var(--transition);
+    }
+    .palabra-tag:hover {
+        background-color: var(--accent);
+        color: white;
+    }
+
+    .diagrama-eje {
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f8f8;
+      padding: 2rem;
+      position: sticky;
+      top: 120px;
+    }
+    
+    .diagrama-eje-svg {
+        width: 100%;
+        max-width: 600px; 
+        overflow: visible;
+    }
+    
+    .diagrama-eje-svg .center-node text {
+        font-weight: 700;
+        font-size: 32px;
+    }
+    .diagrama-eje-svg .center-node .text-bg {
+        stroke-linejoin: round;
+        stroke-width: 10px;
+    }
+    .diagrama-eje-svg .attribute-node text {
+        font-size: 15px;
+        font-weight: 500;
+        text-anchor: middle;
+    }
+    .diagrama-eje-svg .connector-line {
+        stroke: #ccc;
+        stroke-width: 1.5;
+    }
+
+
+    /* --- EJEMPLOS --- */
+    .ejemplos {
+      background-color: var(--section-ejemplos);
+    }
+
+    .ejemplos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ejemplo-card {
+      background-color: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ejemplo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+    }
+
+    .card-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+    .ejemplo-card:hover .card-img img {
+        transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 1.8rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-body h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: var(--secondary);
+    }
+
+    .card-body p {
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+    }
+    .tag.persuadir { background-color: #fff8f0; color: #c78f00; }
+    .tag.valores { background-color: #f0faf4; color: #2c7d5f; }
+    .tag.marca { background-color: #f0f4ff; color: #2b4b7f; }
+    .tag.feed { background-color: #eee; color: #555; }
+    .tag.story { background-color: #eee; color: #555; }
+    .tag.reel { background-color: #eee; color: #555; }
+
+
+    /* --- VAL ASISTENTE --- */
+    .val-section {
+      text-align: center;
+      background-color: var(--section-val);
+    }
+
+    .val-container {
+      max-width: 1100px; 
+      margin: 3rem auto 0;
+      background-color: var(--bg-light);
+      padding: 3.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 2px solid #e0f5f2;
+    }
+
+    .val-container h3 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+    }
+
+    .val-container p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: var(--gray);
+    }
+
+    .val-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    .feature {
+      padding: 2rem;
+      background-color: #fcfcfc;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      transition: var(--transition);
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .feature h4 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .feature p {
+      font-size: 1rem;
+      color: var(--gray);
+    }
+
+    /* --- TIPS --- */
+    .tips {
+      background-color: var(--section-tips);
+    }
+
+    .tips-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tip {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.8rem;
+      box-shadow: var(--shadow);
+      border-left: 6px solid var(--accent);
+      transition: var(--transition);
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    
+    .tip .tip-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+    }
+
+    .tip:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .tip h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--secondary);
+    }
+    
+    .tip-content p {
+        font-size: 1.1rem;
+        color: var(--gray);
+    }
+    
+    .cta-link-container {
+        text-align: center;
+        margin-top: 4rem;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background-color: var(--secondary);
+      color: #aaa;
+      text-align: center;
+      padding: 3rem 5%;
+    }
+
+    footer p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    
+    footer span {
+        margin: 0 0.5rem;
+    }
+
+    /* --- ANIMACIONES --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate {
+      opacity: 0;
+      animation: fadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    .delay-4 { animation-delay: 0.6s; }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo">
+      <img src="logo_primary_black.png" alt="Veylor Logo">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#matriz">Matriz</a></li>
+        <li><a href="#ejemplos">Ejemplos</a></li>
+        <li><a href="#val">VAL</a></li>
+        <li><a href="#tips">Tips de Uso</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero-container">
+    <section class="hero">
+      <h1 class="animate">MATRIZ DISCURSIVA Y ASISTENTE VAL</h1>
+      <p class="animate delay-1">Una herramienta estratégica para comunicar con coherencia, identidad y propósito.</p>
+      <a href="#matriz" class="btn animate delay-2">Explorar la Matriz</a>
+    </section>
+    <div class="hero-separator">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+    </div>
+  </div>
+
+  <!-- MATRIZ GENERAL -->
+  <section id="matriz" class="section">
+    <h2 class="section-title animate">La Matriz Discursiva VEYLOR</h2>
+    <p class="matriz-intro animate delay-1">
+      Todo proyecto necesita una narrativa clara, un marco conceptual. La Matriz Discursiva organiza la comunicación de VEYLOR en tres ejes estratégicos. Esta estructura asegura que cada mensaje sea consistente, relevante y esté alineado con la identidad del proyecto.
+    </p>
+
+    <!-- DIAGRAMA SVG MATRIZ -->
+    <div class="matriz-diagram-container animate delay-2">
+        <svg class="matriz-diagram-svg" viewBox="0 0 1100 450">
+            <defs>
+                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="4" dy="6" stdDeviation="8" flood-color="rgba(0,0,0,0.1)"/>
+                </filter>
+            </defs>
+            
+            <text x="550" y="40" class="center-text">EJES DE COMUNICACIÓN</text>
+
+            <!-- Conectores -->
+            <line class="line-connector" x1="550" y1="120" x2="250" y2="200" />
+            <line class="line-connector" x1="550" y1="120" x2="550" y2="200" />
+            <line class="line-connector" x1="550" y1="120" x2="850" y2="200" />
+
+            <!-- Nodo 1: Persuadir -->
+            <g class="node-group" transform="translate(250, 220)" onclick="document.getElementById('eje-persuadir').scrollIntoView();">
+                <circle class="node-circle" cx="0" cy="0" r="90" fill="#c78f00" filter="url(#shadow)"/>
+                <text class="node-text" y="-5">Persuadir</text>
+                <text class="node-text" y="20">Clientes</text>
+                <text class="node-desc" y="110">Racionalidad y beneficios</text>
+                <foreignObject x="-125" y="130" width="250" height="100">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="explanation-box">
+                        <p>Cualidades de los productos y el proceso de compra. Motivos de la preferencia, beneficios. <strong>¿Por qué razones nos eligen?</strong></p>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Nodo 2: Valores -->
+            <g class="node-group" transform="translate(550, 220)" onclick="document.getElementById('eje-valores').scrollIntoView();">
+                <circle class="node-circle" cx="0" cy="0" r="90" fill="#2c7d5f" filter="url(#shadow)"/>
+                <text class="node-text" y="-5">Proyectar</text>
+                <text class="node-text" y="20">Valores</text>
+                <text class="node-desc" y="110">Emocional y conexión</text>
+                 <foreignObject x="-125" y="130" width="250" height="100">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="explanation-box">
+                        <p>Identidad y personalidad. Lo que transmite Veylor. Cómo se vinculan los clientes con nuestros valores. <strong>¿Qué sienten ante la marca?</strong></p>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Nodo 3: Marca -->
+            <g class="node-group" transform="translate(850, 220)" onclick="document.getElementById('eje-marca').scrollIntoView();">
+                <circle class="node-circle" cx="0" cy="0" r="90" fill="#2b4b7f" filter="url(#shadow)"/>
+                <text class="node-text" y="-5">Fortalecer</text>
+                <text class="node-text" y="20">Marca</text>
+                <text class="node-desc" y="110">Credibilidad e institucionalidad</text>
+                 <foreignObject x="-125" y="130" width="250" height="100">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="explanation-box">
+                        <p>La confianza en el proyecto. Logros y métricas. Construir trayectoria, solidez, diferenciación. <strong>¿Por qué confiar en Veylor?</strong></p>
+                    </div>
+                </foreignObject>
+            </g>
+        </svg>
+    </div>
+
+    <!-- EJES DETALLADOS -->
+    <div class="ejes-container animate delay-3">
+
+      <!-- EJE 1: PERSUADIR CLIENTES -->
+      <div id="eje-persuadir" class="eje persuadir">
+        <div class="eje-header">Eje 1: Persuadir Clientes</div>
+        <div class="eje-content">
+          <div class="atributos">
+            <div class="atributo">
+              <h4>Calidad Premium</h4>
+              <p>Solo productos elegidos que combinan diseño y funcionalidad. Eliminamos el ruido para que elijas con confianza.</p>
+            </div>
+            <div class="atributo">
+              <h4>Experiencia Cuidada</h4>
+              <p>De la web al unboxing, todo es simple, intuitivo y cuidado. Comprá sin tropiezos.</p>
+            </div>
+            <div class="atributo">
+              <h4>Utilidad</h4>
+              <p>Protección y desempeño. Tranquilidad de saber que tu tecnología está bien cuidada.</p>
+            </div>
+            <div class="atributo">
+              <h4>Atención Personalizada</h4>
+              <p>Acompañamiento humano para despejar dudas y asegurar compatibilidad total. No elegís solo.</p>
+            </div>
+            <div class="atributo">
+              <h4>Alcance Nacional</h4>
+              <p>Cobertura en todo el país. Lo mejor del ecosistema Apple, en tu casa.</p>
+            </div>
+            <div class="atributo">
+              <h4>Estilo Depurado</h4>
+              <p>Diseño de vanguardia. Lógica atemporal. Una elección que no pasa de moda.</p>
+            </div>
+            <div class="palabras-clave-container">
+                <h4>Palabras Clave del Eje</h4>
+                <div class="palabras-clave">
+                    <span class="palabra-tag">selección</span><span class="palabra-tag">calidad</span><span class="palabra-tag">garantía</span><span class="palabra-tag">confianza</span><span class="palabra-tag">simple</span><span class="palabra-tag">rápido</span><span class="palabra-tag">seguro</span><span class="palabra-tag">inversión</span><span class="palabra-tag">protección</span><span class="palabra-tag">compatibilidad</span><span class="palabra-tag">soporte</span><span class="palabra-tag">experto</span><span class="palabra-tag">solución</span><span class="palabra-tag">beneficio</span><span class="palabra-tag">premium</span><span class="palabra-tag">envío</span><span class="palabra-tag">diseño</span><span class="palabra-tag">funcionalidad</span>
+                </div>
+            </div>
+          </div>
+          <div class="diagrama-eje">
+            <svg class="diagrama-eje-svg" viewBox="0 0 700 700">
+                <g class="center-node">
+                    <circle cx="350" cy="350" r="130" fill="#c78f00"/>
+                    <text class="text-bg" x="350" y="340" text-anchor="middle" stroke="#c78f00">Persuadir</text>
+                    <text class="text-bg" x="350" y="375" text-anchor="middle" stroke="#c78f00">Clientes</text>
+                    <text x="350" y="340" text-anchor="middle" fill="white">Persuadir</text>
+                    <text x="350" y="375" text-anchor="middle" fill="white">Clientes</text>
+                </g>
+                <g class="attribute-nodes">
+                    <line class="connector-line" x1="350" y1="350" x2="350" y2="150"/>
+                    <g class="attribute-node" transform="translate(350, 90)">
+                        <circle r="60" fill="#fff" stroke="#c78f00" stroke-width="2"/>
+                        <text fill="#333"><tspan x="0" dy="-0.4em">Calidad</tspan><tspan x="0" dy="1.2em">Premium</tspan></text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="550" y2="220"/>
+                    <g class="attribute-node" transform="translate(610, 200)">
+                        <circle r="60" fill="#fff" stroke="#c78f00" stroke-width="2"/>
+                        <text fill="#333"><tspan x="0" dy="-0.4em">Experiencia</tspan><tspan x="0" dy="1.2em">Cuidada</tspan></text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="550" y2="480"/>
+                    <g class="attribute-node" transform="translate(610, 500)">
+                        <circle r="60" fill="#fff" stroke="#c78f00" stroke-width="2"/>
+                        <text y="5" fill="#333">Utilidad</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="350" y2="550"/>
+                    <g class="attribute-node" transform="translate(350, 610)">
+                        <circle r="60" fill="#fff" stroke="#c78f00" stroke-width="2"/>
+                        <text fill="#333"><tspan x="0" dy="-0.4em">Atención</tspan><tspan x="0" dy="1.2em">Personalizada</tspan></text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="150" y2="480"/>
+                    <g class="attribute-node" transform="translate(90, 500)">
+                        <circle r="60" fill="#fff" stroke="#c78f00" stroke-width="2"/>
+                        <text fill="#333"><tspan x="0" dy="-0.4em">Alcance</tspan><tspan x="0" dy="1.2em">Nacional</tspan></text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="150" y2="220"/>
+                    <g class="attribute-node" transform="translate(90, 200)">
+                        <circle r="60" fill="#fff" stroke="#c78f00" stroke-width="2"/>
+                        <text fill="#333"><tspan x="0" dy="-0.4em">Estilo</tspan><tspan x="0" dy="1.2em">Depurado</tspan></text>
+                    </g>
+                </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- EJE 2: PROYECTAR VALORES -->
+      <div id="eje-valores" class="eje valores">
+        <div class="eje-header">Eje 2: Proyectar Valores</div>
+        <div class="eje-content">
+          <div class="atributos">
+            <div class="atributo">
+              <h4>Simplicidad</h4>
+              <p>Hacemos que la tecnología se sienta fácil: menos ruido, más claridad.</p>
+            </div>
+            <div class="atributo">
+              <h4>Innovación</h4>
+              <p>Mirada de vanguardia aplicada a soluciones cotidianas; siempre un paso adelante.</p>
+            </div>
+            <div class="atributo">
+              <h4>Eficiencia</h4>
+              <p>Tiempo bien invertido: procesos ágiles, decisiones claras, foco en lo esencial.</p>
+            </div>
+            <div class="atributo">
+              <h4>Integridad</h4>
+              <p>Honestidad y compatibilidad real; lo que prometemos, lo cumplimos.</p>
+            </div>
+            <div class="atributo">
+              <h4>Compromiso</h4>
+              <p>Soporte cercano y sostenido; estamos cuando nos necesitás.</p>
+            </div>
+            <div class="atributo">
+              <h4>Cercanía</h4>
+              <p>Puente entre sofisticación global e identidad local; entendemos cómo vivís tu tecnología.</p>
+            </div>
+            <div class="palabras-clave-container">
+                <h4>Palabras Clave del Eje</h4>
+                <div class="palabras-clave">
+                    <span class="palabra-tag">integridad</span><span class="palabra-tag">compromiso</span><span class="palabra-tag">cercanía</span><span class="palabra-tag">transparencia</span><span class="palabra-tag">propósito</span><span class="palabra-tag">novedad</span><span class="palabra-tag">excelencia</span><span class="palabra-tag">confianza</span><span class="palabra-tag">coherencia</span><span class="palabra-tag">respeto</span><span class="palabra-tag">sensación</span><span class="palabra-tag">identidad</span><span class="palabra-tag">único</span><span class="palabra-tag">elegancia</span><span class="palabra-tag">simpleza</span><span class="palabra-tag">calma</span><span class="palabra-tag">inspiración</span>
+                </div>
+            </div>
+          </div>
+          <div class="diagrama-eje">
+            <svg class="diagrama-eje-svg" viewBox="0 0 700 700">
+                <g class="center-node">
+                    <circle cx="350" cy="350" r="130" fill="#2c7d5f"/>
+                    <text class="text-bg" x="350" y="340" text-anchor="middle" stroke="#2c7d5f">Proyectar</text>
+                    <text class="text-bg" x="350" y="375" text-anchor="middle" stroke="#2c7d5f">Valores</text>
+                    <text x="350" y="340" text-anchor="middle" fill="white">Proyectar</text>
+                    <text x="350" y="375" text-anchor="middle" fill="white">Valores</text>
+                </g>
+                <g class="attribute-nodes">
+                    <line class="connector-line" x1="350" y1="350" x2="350" y2="150"/>
+                    <g class="attribute-node" transform="translate(350, 90)">
+                        <circle r="60" fill="#fff" stroke="#2c7d5f" stroke-width="2"/>
+                        <text y="5" fill="#333">Simplicidad</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="550" y2="220"/>
+                    <g class="attribute-node" transform="translate(610, 200)">
+                        <circle r="60" fill="#fff" stroke="#2c7d5f" stroke-width="2"/>
+                        <text y="5" fill="#333">Innovación</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="550" y2="480"/>
+                    <g class="attribute-node" transform="translate(610, 500)">
+                        <circle r="60" fill="#fff" stroke="#2c7d5f" stroke-width="2"/>
+                        <text y="5" fill="#333">Eficiencia</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="350" y2="550"/>
+                    <g class="attribute-node" transform="translate(350, 610)">
+                        <circle r="60" fill="#fff" stroke="#2c7d5f" stroke-width="2"/>
+                        <text y="5" fill="#333">Integridad</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="150" y2="480"/>
+                    <g class="attribute-node" transform="translate(90, 500)">
+                        <circle r="60" fill="#fff" stroke="#2c7d5f" stroke-width="2"/>
+                        <text y="5" fill="#333">Compromiso</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="150" y2="220"/>
+                    <g class="attribute-node" transform="translate(90, 200)">
+                        <circle r="60" fill="#fff" stroke="#2c7d5f" stroke-width="2"/>
+                        <text y="5" fill="#333">Cercanía</text>
+                    </g>
+                </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- EJE 3: FORTALECER MARCA -->
+      <div id="eje-marca" class="eje marca">
+        <div class="eje-header">Eje 3: Fortalecer Marca</div>
+        <div class="eje-content">
+          <div class="atributos">
+            <div class="atributo">
+              <h4>Conocimiento</h4>
+              <p>Vivimos y respiramos el ecosistema Apple. Entendimiento profundo y especializado.</p>
+            </div>
+            <div class="atributo">
+              <h4>Trayectoria</h4>
+              <p>Herencia de MR Store: una base real de confianza y experiencia.</p>
+            </div>
+            <div class="atributo">
+              <h4>Visión</h4>
+              <p>Hoy lo mejor; mañana líneas propias en desarrollo. Ambición con plan.</p>
+            </div>
+            <div class="atributo">
+              <h4>Comunidad</h4>
+              <p>Punto de encuentro para amantes del diseño y la tecnología: compartir, descubrir, conversar.</p>
+            </div>
+            <div class="atributo">
+              <h4>ADN Digital</h4>
+              <p>Nacidos online: ágiles, directos y disponibles, sin trabas del retail tradicional.</p>
+            </div>
+            <div class="atributo">
+              <h4>Solidez</h4>
+              <p>Resultados concretos: envíos, satisfacción, reseñas, mejoras continuas; evidencia de crecimiento.</p>
+            </div>
+            <div class="palabras-clave-container">
+                <h4>Palabras Clave del Eje</h4>
+                <div class="palabras-clave">
+                    <span class="palabra-tag">especialistas</span><span class="palabra-tag">expertos</span><span class="palabra-tag">confianza</span><span class="palabra-tag">respaldo</span><span class="palabra-tag">trayectoria</span><span class="palabra-tag">futuro</span><span class="palabra-tag">visión</span><span class="palabra-tag">comunidad</span><span class="palabra-tag">equipo</span><span class="palabra-tag">historia</span><span class="palabra-tag">crecimiento</span><span class="palabra-tag">innovación</span><span class="palabra-tag">líderes</span><span class="palabra-tag">auténtico</span><span class="palabra-tag">foco</span><span class="palabra-tag">ecosistema</span><span class="palabra-tag">alianzas</span><span class="palabra-tag">hitos</span>
+                </div>
+            </div>
+          </div>
+          <div class="diagrama-eje">
+            <svg class="diagrama-eje-svg" viewBox="0 0 700 700">
+                <g class="center-node">
+                    <circle cx="350" cy="350" r="130" fill="#2b4b7f"/>
+                    <text class="text-bg" x="350" y="340" text-anchor="middle" stroke="#2b4b7f">Fortalecer</text>
+                    <text class="text-bg" x="350" y="375" text-anchor="middle" stroke="#2b4b7f">Marca</text>
+                    <text x="350" y="340" text-anchor="middle" fill="white">Fortalecer</text>
+                    <text x="350" y="375" text-anchor="middle" fill="white">Marca</text>
+                </g>
+                <g class="attribute-nodes">
+                    <line class="connector-line" x1="350" y1="350" x2="350" y2="150"/>
+                    <g class="attribute-node" transform="translate(350, 90)">
+                        <circle r="60" fill="#fff" stroke="#2b4b7f" stroke-width="2"/>
+                        <text fill="#333"><tspan x="0" dy="-0.4em">Conocimiento</tspan><tspan x="0" dy="1.2em">Apple</tspan></text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="550" y2="220"/>
+                    <g class="attribute-node" transform="translate(610, 200)">
+                        <circle r="60" fill="#fff" stroke="#2b4b7f" stroke-width="2"/>
+                        <text y="5" fill="#333">Trayectoria</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="550" y2="480"/>
+                    <g class="attribute-node" transform="translate(610, 500)">
+                        <circle r="60" fill="#fff" stroke="#2b4b7f" stroke-width="2"/>
+                        <text y="5" fill="#333">Visión</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="350" y2="550"/>
+                    <g class="attribute-node" transform="translate(350, 610)">
+                        <circle r="60" fill="#fff" stroke="#2b4b7f" stroke-width="2"/>
+                        <text y="5" fill="#333">Comunidad</text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="150" y2="480"/>
+                    <g class="attribute-node" transform="translate(90, 500)">
+                        <circle r="60" fill="#fff" stroke="#2b4b7f" stroke-width="2"/>
+                        <text fill="#333"><tspan x="0" dy="-0.4em">ADN</tspan><tspan x="0" dy="1.2em">Digital</tspan></text>
+                    </g>
+                    <line class="connector-line" x1="350" y1="350" x2="150" y2="220"/>
+                    <g class="attribute-node" transform="translate(90, 200)">
+                        <circle r="60" fill="#fff" stroke="#2b4b7f" stroke-width="2"/>
+                        <text y="5" fill="#333">Solidez</text>
+                    </g>
+                </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EJEMPLOS -->
+  <section id="ejemplos" class="section ejemplos">
+    <h2 class="section-title animate">Ejemplos de Contenido</h2>
+    <p class="matriz-intro animate delay-1">
+      Cada pieza de comunicación se alinea a uno o más ejes. Aquí algunos ejemplos prácticos que nacen de la matriz.
+    </p>
+    <div class="ejemplos-grid">
+      <div class="ejemplo-card animate">
+        <div class="card-img">
+          <img src="logo_mark_white.png" alt="Lanzamiento de marca" style="background-color: #1a1a1a; padding: 2rem;"/>
+        </div>
+        <div class="card-body">
+          <h3>Lanzamiento de Marca</h3>
+          <p>Nace VEYLOR: especialistas en Apple, con ADN digital y una selección curada de accesorios. Diseño pensado para durar. Experiencia simple, como tiene que ser.</p>
+          <div class="tags">
+            <span class="tag feed">Feed</span>
+            <span class="tag marca">Fortalecer Marca</span>
+          </div>
+        </div>
+      </div>
+      <div class="ejemplo-card animate delay-1">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Encuesta de estilo" />
+        </div>
+        <div class="card-body">
+          <h3>Encuesta de Estilo</h3>
+          <p>¿Minimalista o con carácter? Votá y contanos qué funda va más con vos.</p>
+          <div class="tags">
+            <span class="tag story">Story</span>
+            <span class="tag valores">Proyectar Valores</span>
+            <span class="tag marca">Fortalecer Marca</span>
+          </div>
+        </div>
+      </div>
+      <div class="ejemplo-card animate delay-2">
+        <div class="card-img">
+          <img src="unboxing.png" alt="Unboxing Veylor" />
+        </div>
+        <div class="card-body">
+          <h3>Unboxing Perfecto</h3>
+          <p>Sonidos limpios, embalaje impecable. La experiencia comienza antes de usarlo.</p>
+          <div class="tags">
+            <span class="tag reel">Reel</span>
+            <span class="tag persuadir">Persuadir</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VAL ASISTENTE -->
+  <section id="val" class="section val-section">
+    <h2 class="section-title animate">VAL: Tu Asistente Creativo</h2>
+    <p class="matriz-intro animate delay-1">
+      VAL es el puente entre estrategia y acción. Genera contenido listo para publicar, explora ideas y mucho más. Siempre alineado con la lógica del proyecto y su matriz discursiva.
+    </p>
+    <div class="val-container animate delay-2">
+      <h3>¿Qué hace VAL?</h3>
+      <div class="val-features">
+        <div class="feature">
+          <h4>Redactor Experto</h4>
+          <p>Genera textos en diferentes formatos: posteos para redes, historias, eslóganes, etc.</p>
+        </div>
+        <div class="feature">
+          <h4>Asistente Conversacional</h4>
+          <p>Podés conversar por audio o texto, para explorar ideas, resolver problemas o pensar en futuros proyectos.</p>
+        </div>
+        <div class="feature">
+          <h4>Analista Estratégico</h4>
+          <p>Capaz de analizar y planificar campañas de marketing y comunicación.</p>
+        </div>
+        <div class="feature">
+          <h4>Piensa con GPT-5</h4>
+          <p>Está implementado sobre ChatGPT y utiliza el modelo GPT-5. Si tenés una cuenta plus, podés usarlo en modo "thinking", lo que aumenta su capacidad.</p>
+        </div>
+        <div class="feature">
+          <h4>Enfoque creativo</h4>
+          <p>Puede asistirte con una mirada creativa sobre el tema que le propongas.</p>
+        </div>
+        <div class="feature">
+          <h4>Imágenes y web</h4>
+          <p>Tiene la capacidad de generar imágenes y buscar en internet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section id="tips" class="section tips">
+    <h2 class="section-title animate">Cómo Usar VAL</h2>
+    <div class="tips-container">
+      <div class="tip animate">
+        <div class="tip-number">1</div>
+        <div class="tip-content">
+            <h3>Definí objetivo, producto y formato</h3>
+            <p>Ej: “Quiero un posteo para Instagram que persuada a clientes sobre la funda de iPhone. Destacar calidad y diseño.” VAL responde con texto, hashtags y guía visual.</p>
+        </div>
+      </div>
+      <div class="tip animate delay-1">
+        <div class="tip-number">2</div>
+        <div class="tip-content">
+            <h3>Pedí variantes o formatos complementarios</h3>
+            <p>VAL puede sugerir una story o un reel que acompañe al post principal, manteniendo coherencia narrativa.</p>
+        </div>
+      </div>
+      <div class="tip animate delay-2">
+        <div class="tip-number">3</div>
+        <div class="tip-content">
+            <h3>Activá el modo técnico cuando necesites profundidad</h3>
+            <p>Pedí: “Mostrá ejes y atributos”. VAL explica el mapeo estratégico detrás del contenido.</p>
+        </div>
+      </div>
+      <div class="cta-link-container animate delay-3">
+          <a href="https://chatgpt.com/share/68b1c48d-f8fc-8003-9cd5-122b738d1a32" target="_blank" class="btn btn-secondary">Ver un ejemplo de VAL en acción</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Desarrollado por nesval 👽<span>|</span>© 2025</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate');
+        elements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.9) {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }
+        });
+      };
+
+      window.addEventListener('scroll', animateOnScroll);
+      animateOnScroll();
+    });
+  </script>
+
+</body>
+</html>
